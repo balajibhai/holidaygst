@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Container, Box, Button } from "@mui/material";
+import GSTFreeFilter from "./GSTFreeFilter";
 
-function App() {
+const App: React.FC = () => {
+  const [isGstClicked, setIsGstClicked] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Container maxWidth="md">
+      <Box display="flex" justifyContent="center" gap={2} my={4}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setIsGstClicked(!isGstClicked)}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Holiday GST Free
+        </Button>
+      </Box>
+
+      {isGstClicked && <GSTFreeFilter />}
+    </Container>
   );
-}
+};
 
 export default App;
