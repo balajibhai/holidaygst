@@ -53,16 +53,16 @@ const isGstFree = (scannedItem: Itemtype, flattenedData: string[]): boolean => {
 // Example Component
 const ComparisonEngine = (props: ComparisonEngineProps) => {
   const { scannedItem } = props;
-  const [gstFree, setGstFree] = useState(false);
+  const [gstFree, setGstFree] = useState("");
   const [alert, setAlert] = useState(true);
 
   useEffect(() => {
     const flattenedData = flattenData(data);
     const result = isGstFree(scannedItem, flattenedData);
     if (result) {
-      setGstFree(true);
+      setGstFree("Congratulations! This item has no GST");
     } else {
-      setGstFree(false);
+      setGstFree("Oh hoo! This item has GST");
     }
     setAlert(true);
   }, [scannedItem]);

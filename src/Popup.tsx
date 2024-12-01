@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 type PopupProps = {
   alert: boolean;
   onClose: () => void;
-  gstFree: boolean;
+  gstFree: string;
 };
 
 const Popup = (props: PopupProps) => {
@@ -32,9 +32,7 @@ const Popup = (props: PopupProps) => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {gstFree
-              ? "Congratulations! This item has no GST"
-              : "Oh hoo! This item has GST"}
+            {gstFree}
           </DialogContentText>
         </DialogContent>
         <DialogActions></DialogActions>

@@ -38,6 +38,8 @@ const App: React.FC = () => {
 
   return (
     <Container maxWidth="md">
+      <BarcodeScanner getScannedCode={getScannedCode} onScan={onScan} />
+      {isScanned && <ComparisonEngine scannedItem={scannedItem} />}
       <Box display="flex" justifyContent="center" gap={2} my={4}>
         <Button
           variant="contained"
@@ -46,11 +48,8 @@ const App: React.FC = () => {
         >
           Holiday GST Free
         </Button>
-        <BarcodeScanner getScannedCode={getScannedCode} onScan={onScan} />
       </Box>
-
       {isGstClicked && <GSTFreeFilter />}
-      {isScanned && <ComparisonEngine scannedItem={scannedItem} />}
     </Container>
   );
 };
