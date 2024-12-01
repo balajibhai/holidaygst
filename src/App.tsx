@@ -11,7 +11,6 @@ const App: React.FC = () => {
     category: "",
     title: "",
   });
-  const [isScanned, setIsScanned] = useState(false);
 
   const getScannedCode = useCallback((value: string) => {
     const API_URL = `https://thingproxy.freeboard.io/fetch/https://api.upcitemdb.com/prod/trial/lookup?upc=${value}`;
@@ -32,14 +31,12 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
-  const onScan = useCallback(() => {
-    setIsScanned(true);
-  }, []);
-
   return (
     <Container maxWidth="md">
-      <BarcodeScanner getScannedCode={getScannedCode} onScan={onScan} />
-      {isScanned && <ComparisonEngine scannedItem={scannedItem} />}
+      <BarcodeScanner getScannedCode={getScannedCode} />
+      {(scannedItem.category || scannedItem.title) && (
+        <ComparisonEngine scannedItem={scannedItem} />
+      )}
       <Box display="flex" justifyContent="center" gap={2} my={4}>
         <Button
           variant="contained"

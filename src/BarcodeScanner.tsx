@@ -3,11 +3,10 @@ import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 type BarcodeScannerProps = {
   getScannedCode: (value1: string) => void;
-  onScan: () => void;
 };
 
 const BarcodeScanner = (props: BarcodeScannerProps) => {
-  const { getScannedCode, onScan } = props;
+  const { getScannedCode } = props;
   const [data, setData] = useState<string>("Not Found");
   const [scanned, setScanned] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,14 +18,13 @@ const BarcodeScanner = (props: BarcodeScannerProps) => {
         setScanned(true);
         setError(null); // Clear any previous errors
         getScannedCode(result.text);
-        onScan();
       }
       if (err) {
         console.error("Scanning Error:", err);
         setError("Error scanning barcode. Please try again.");
       }
     },
-    [getScannedCode, scanned, onScan]
+    [getScannedCode, scanned]
   );
 
   const handleReset = useCallback(() => {
