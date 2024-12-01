@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -8,29 +7,23 @@ import DialogContentText from "@mui/material/DialogContentText";
 type PopupProps = {
   alert: boolean;
   onClose: () => void;
+  gstFree: boolean;
 };
 
 const Popup = (props: PopupProps) => {
-  const { alert, onClose } = props;
+  const { alert, onClose, gstFree } = props;
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     setOpen(alert);
   }, [alert]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    onClose();
   };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -39,7 +32,9 @@ const Popup = (props: PopupProps) => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            GST or No GST
+            {gstFree
+              ? "Congratulations! This item has no GST"
+              : "Oh hoo! This item has GST"}
           </DialogContentText>
         </DialogContent>
         <DialogActions></DialogActions>

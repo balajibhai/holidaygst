@@ -20,7 +20,6 @@ const App: React.FC = () => {
         const res = await fetch(API_URL);
         const data = await res.json();
         if (data.items && data.items.length > 0) {
-          // console.log("data: ", data.items);
           setScannedItem({
             category: data.items[0].category,
             title: data.items[0].title,
@@ -33,9 +32,9 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
-  const onScan = () => {
+  const onScan = useCallback(() => {
     setIsScanned(true);
-  };
+  }, []);
 
   return (
     <Container maxWidth="md">

@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Category, GSTData } from "./types";
 import { Itemtype } from "./ComponentTypes";
 import data from "./gstitemsdata";
+import Popup from "./Popup";
 
 type ComparisonEngineProps = {
   scannedItem: Itemtype;
@@ -52,23 +53,25 @@ const isGstFree = (scannedItem: Itemtype, flattenedData: string[]): boolean => {
 // Example Component
 const ComparisonEngine = (props: ComparisonEngineProps) => {
   const { scannedItem } = props;
+  const [gstFree, setGstFree] = useState(false);
+  const [alert, setAlert] = useState(true);
 
   useEffect(() => {
     const flattenedData = flattenData(data);
-
-    // Debugging the flattened data and scanned item for clarity
-    console.log("Flattened Data:", flattenedData);
-    console.log("Scanned Item:", scannedItem);
-
     const result = isGstFree(scannedItem, flattenedData);
     if (result) {
-      console.log("GST free");
+      setGstFree(true);
     } else {
-      console.log("GST is not free");
+      setGstFree(false);
     }
+    setAlert(true);
   }, [scannedItem]);
 
-  return <div>Check console for GST status</div>;
+  const onAlertClose = () => {
+    setAlert(false);
+  };
+
+  return <Popup alert={alert} onClose={onAlertClose} gstFree={gstFree} />;
 };
 
 export default ComparisonEngine;
