@@ -71,7 +71,14 @@ const ComparisonEngine = (props: ComparisonEngineProps) => {
     setAlert(false);
   };
 
-  return <Popup alert={alert} onClose={onAlertClose} gstFree={gstFree} />;
+  return (
+    <Popup
+      alert={alert}
+      onClose={onAlertClose}
+      gstFree={gstFree}
+      scannedItem={scannedItem}
+    />
+  );
 };
 
 export default ComparisonEngine;
