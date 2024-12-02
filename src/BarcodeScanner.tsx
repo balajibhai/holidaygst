@@ -5,6 +5,13 @@ type BarcodeScannerProps = {
   getScannedCode: (value1: string) => void;
 };
 
+export const buttonStyle = {
+  padding: "10px 20px",
+  fontSize: "16px",
+  marginTop: "10px",
+  cursor: "pointer",
+};
+
 const BarcodeScanner = (props: BarcodeScannerProps) => {
   const { getScannedCode } = props;
   const [data, setData] = useState<string>("Not Found");
@@ -41,13 +48,6 @@ const BarcodeScanner = (props: BarcodeScannerProps) => {
 
   const resultContainerStyle: CSSProperties = {
     marginTop: "20px",
-  };
-
-  const buttonStyle: CSSProperties = {
-    padding: "10px 20px",
-    fontSize: "16px",
-    marginTop: "10px",
-    cursor: "pointer",
   };
 
   const errorStyle: CSSProperties = {

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Container, Box, Button } from "@mui/material";
 import GSTFreeFilter from "./GSTFreeFilter";
-import BarcodeScanner from "./BarcodeScanner";
+import BarcodeScanner, { buttonStyle } from "./BarcodeScanner";
 import { Itemtype } from "./ComponentTypes";
 import ComparisonEngine from "./ComparisonEngine";
 
@@ -11,6 +11,7 @@ const App: React.FC = () => {
     category: "",
     title: "",
   });
+  const [isScanClick, setIsScanClick] = useState(false);
 
   const getScannedCode = useCallback((value: string) => {
     // Use the Netlify Function URL
@@ -35,7 +36,14 @@ const App: React.FC = () => {
 
   return (
     <Container maxWidth="md">
-      <BarcodeScanner getScannedCode={getScannedCode} />
+      <Box display="flex" justifyContent="center" gap={2} my={4}>
+        {!isScanClick && (
+          <button onClick={() => setIsScanClick(true)} style={buttonStyle}>
+            Scan now
+          </button>
+        )}
+      </Box>
+      {isScanClick && <BarcodeScanner getScannedCode={getScannedCode} />}
       {(scannedItem.category || scannedItem.title) && (
         <ComparisonEngine scannedItem={scannedItem} />
       )}
