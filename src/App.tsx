@@ -13,7 +13,9 @@ const App: React.FC = () => {
   });
 
   const getScannedCode = useCallback((value: string) => {
-    const API_URL = `https://thingproxy.freeboard.io/fetch/https://api.upcitemdb.com/prod/trial/lookup?upc=${value}`;
+    // Use the Netlify Function URL
+    const API_URL = `/.netlify/functions/upc-lookup?upc=${value}`;
+
     const fetchData = async () => {
       try {
         const res = await fetch(API_URL);
